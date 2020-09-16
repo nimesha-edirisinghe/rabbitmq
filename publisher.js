@@ -6,8 +6,8 @@ async function connect() {
   try {
     const connection = await amqp.connect("amqp://localhost:5672");
     const channel = await connection.createChannel();
-    await channel.assertQueue("jobs");
-    channel.sendToQueue("jobs", Buffer.from(JSON.stringify(msg)));
+    await channel.assertQueue("jobQ");
+    channel.sendToQueue("jobQ", Buffer.from(JSON.stringify(msg)));
     console.log(`Job sent successfully ${msg.number}`);
   } catch (ex) {
     console.log(ex);

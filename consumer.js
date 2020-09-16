@@ -5,10 +5,10 @@ async function connect() {
   try {
     const connection = await amqp.connect("amqp://localhost:5672");
     const channel = await connection.createChannel();
-    await channel.assertQueue("jobs");
-    channel.consume("jobs", (message) => {
+    await channel.assertQueue("jobQ");
+    channel.consume("jobQ", (message) => {
       const input = JSON.parse(message.content.toString());
-      console.log(`Recieved job with input ${input.number}`);
+      console.log(`Received job with input ${input.number}`);
     });
     console.log("Waiting for messages...");
   } catch (ex) {

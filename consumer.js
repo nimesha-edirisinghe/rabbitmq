@@ -1,4 +1,5 @@
-const amqp = require("amqplib");
+import logger from "logger";
+import amqp from "amqplib";
 
 connect();
 async function connect() {
@@ -10,8 +11,8 @@ async function connect() {
       const input = JSON.parse(message.content.toString());
       console.log(`Received job with input ${input.number}`);
     });
-    console.log("Waiting for messages...");
+    logger.info("Waiting for messages...");
   } catch (ex) {
-    console.log(ex);
+    logger.error(ex);
   }
 }

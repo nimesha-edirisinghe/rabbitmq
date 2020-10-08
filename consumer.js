@@ -9,7 +9,7 @@ async function connect() {
     await channel.assertQueue("jobQ");
     channel.consume("jobQ", (message) => {
       const input = JSON.parse(message.content.toString());
-      console.log(`Received job with input ${input.number}`);
+      logger.info(`Received job with input ${input.number}`);
     });
     logger.info("Waiting for messages...");
   } catch (ex) {
